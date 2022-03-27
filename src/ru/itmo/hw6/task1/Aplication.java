@@ -18,18 +18,25 @@ public class Aplication {
         Mountain mountain1= new Mountain("Эльбрус","Россия",5600);
         Mountain mountain2= new Mountain("Эверест","Непал",8800);
         Mountain mountain3= new Mountain("Чогори","Китай",8600);
-        Group group1= new Group(mountain1);
-        group1.addClimber(climber1);
-        group1.addClimber(climber2);
-        group1.addClimber(climber3);
-        
-        Group group2= new Group(mountain2);   
-        group2.addClimber(climber4);
-        group2.addClimber(climber5);
 
-        Group group3= new Group(mountain2);
+        Group group=new Group(mountain1);
+        group.addClimber(climber1);
+        group.addClimber(climber2);
+        group.addClimber(climber3);
+        group.addClimber(climber4);
+        group.getStatus();
+
+        Group group1=new Group(mountain2);
+        group1.addClimber(climber4);
+        group1.addClimber(climber5);
+
+        group1.getStatus();
+
+        Group group2=new Group(mountain3);
         group2.addClimber(climber6);
         group2.addClimber(climber7);
+
+        group2.getStatus();
 
     }
 

@@ -1,9 +1,4 @@
-package ru.itmo.hw6.task2;
-
-import ru.itmo.hw6.task1.climbers.Climber;
-import ru.itmo.hw6.task1.climbers.Mountain;
-
-import java.util.Objects;
+package ru.itmo.hw6.task2.Products;
 
 public class MyProducts {
     private Product product;
@@ -58,15 +53,26 @@ public class MyProducts {
 
     }
 
+    public void printMyProducts(){
+        for (Product myProduct:myProducts){
+            if (myProduct!=null){
+                System.out.println(myProduct.getName());
+            }
+        }
+
+
+    }
+
     public void addProduct(Product product) {
-        if (product.getCalories() <= maxCalories || product.getCarbohydrates() <= maxCarbohydrates || product.getFats() <= maxFats || product.getProteins() <= maxProteins) {
+        if (product.getCalories() <= maxCalories && product.getCarbohydrates() <= maxCarbohydrates && product.getFats() <= maxFats && product.getProteins() <= maxProteins) {
             for (int i = 0; i < myProducts.length; i += 1) {
                 if (myProducts[i] == null) {
                     myProducts[i] = product;
                     return;
                 }
-                System.out.println("В корзине нет места");
+
             }
+            System.out.println("В корзине нет места");
         } else if (product.getCalories() > maxCalories) {
                     System.out.println("Продукт содержит слишком много калорий");
 

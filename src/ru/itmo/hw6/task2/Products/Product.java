@@ -1,4 +1,4 @@
-package ru.itmo.hw6.task2;
+package ru.itmo.hw6.task2.Products;
 
 public class Product {
     private String name;
