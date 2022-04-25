@@ -32,23 +32,26 @@ public class Fitness {
 
         if (LocalDate.now().isAfter(subscription.getFinishDate())) {
             System.out.println("Ваш абонимент просрочен");
-       // } else if (moment < subscription.getType().getFromTime() * 60 || moment >= subscription.getType().getToTime() * 60) {
-         //   System.out.println("Ваш абонимент не действителен в это время дня");
+        } else if (moment < subscription.getType().getFromTime() * 60 || moment >= subscription.getType().getToTime() * 60) {
+            System.out.println("Ваш абонимент не действителен в это время дня");
         } else if ((zoneName.equals("swimmingpool") && subscription.getType() == Type.DAYTIME) || (zoneName.equals("groupclasses") && subscription.getType() == Type.ONETIME)) {
             System.out.println("Эта зона не входит в ваш абонимент");
-        }
-        for (int i = 0; i < max; i += 1) {
-            int number = Arrays.binarySearch(zoneNames, zoneName);
-            //Subscription[]zone=zones[number];
-            if (zones[number][i]==null){
-                zones[number][i]=subscription;
-                System.out.println("ФИО "+ subscription.getClient().getFullName() +" в "+ zoneName + " время посещения: "+LocalDateTime.now());
-                return;
+        }else {
+            for (int i = 0; i < max; i += 1) {
+                int number = Arrays.binarySearch(zoneNames, zoneName);
+                //Subscription[]zone=zones[number];
+                if (zones[number][i] == null) {
+                    zones[number][i] = subscription;
+                    System.out.println("ФИО " + subscription.getClient().getFullName() + " в " + zoneName + " время посещения: " + LocalDateTime.now());
+                    return;
+
+                }
+
+
             }
-
-
+            System.out.println("В зоне нет мест");
         }
-        System.out.println("В зоне нет мест");
+
 
     }
     public void close() {
@@ -60,12 +63,9 @@ public class Fitness {
     @Override
     public String toString() {
         return "Fitness{" +
-                "max=" + max +
-                ", zoneNames=" + Arrays.toString(zoneNames) +
-                ", swimmingPool=" + Arrays.toString(swimmingPool) +
+                "swimmingPool=" + Arrays.toString(swimmingPool) +
                 ", gim=" + Arrays.toString(gim) +
                 ", groupClasses=" + Arrays.toString(groupClasses) +
-                ", zones=" + Arrays.toString(zones) +
                 '}';
     }
 }
