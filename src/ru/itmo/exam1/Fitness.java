@@ -6,7 +6,8 @@ import java.util.Arrays;
 
 public class Fitness {
     int max = 20;
-    private String[] zoneNames={"gim","swimmingpool","groupclasses"};
+
+    //private String[] zoneNames={"gim","swimmingpool","groupclasses"};
 
     private Subscription[] swimmingPool = new Subscription[max];
     private Subscription[] gim = new Subscription[max];
@@ -26,7 +27,7 @@ public class Fitness {
         return swimmingPool;
     }
 
-    public void addSubscription(String zoneName, Subscription subscription) {
+    public void addSubscription(Zone zone, Subscription subscription) {
 
         int moment = LocalDateTime.now().getHour() * 60 + LocalDateTime.now().getMinute();
 
@@ -34,15 +35,15 @@ public class Fitness {
             System.out.println("Ваш абонимент просрочен");
         } else if (moment < subscription.getType().getFromTime() * 60 || moment >= subscription.getType().getToTime() * 60) {
             System.out.println("Ваш абонимент не действителен в это время дня");
-        } else if ((zoneName.equals("swimmingpool") && subscription.getType() == Type.DAYTIME) || (zoneName.equals("groupclasses") && subscription.getType() == Type.ONETIME)) {
-            System.out.println("Эта зона не входит в ваш абонимент");
+       } else if ((zone==Zone.SWIMMINGPOOL && subscription.getType() == Type.DAYTIME) || (zone==Zone.GROUPCLASSES && subscription.getType() == Type.ONETIME)) {
+           System.out.println("Эта зона не входит в ваш абонимент");
         }else {
             for (int i = 0; i < max; i += 1) {
-                int number = Arrays.binarySearch(zoneNames, zoneName);
+                //int number = Arrays.binarySearch(zoneNames, zoneName);
                 //Subscription[]zone=zones[number];
-                if (zones[number][i] == null) {
-                    zones[number][i] = subscription;
-                    System.out.println("ФИО " + subscription.getClient().getFullName() + " в " + zoneName + " время посещения: " + LocalDateTime.now());
+                if (zones[zone.ordinal()][i] == null) {
+                    zones[zone.ordinal()][i] = subscription;
+                    System.out.println("ФИО " + subscription.getClient().getFullName() + " в " + zone + " время посещения: " + LocalDateTime.now());
                     return;
 
                 }
