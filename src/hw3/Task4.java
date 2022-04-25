@@ -17,7 +17,7 @@ public class Task4 {
                 System.out.println("Загаданное число больше или меньше названного ?(о -меньше, 1- больше)");
                 userAnsw = in.nextInt();
                 if (userAnsw == 1) {
-                    min = compAnsw + 1;
+                    min = compAnsw - 1;
                     compAnsw = (int) (Math.random() * (max- min) + min);
                 } else {
                     max = compAnsw + 1;

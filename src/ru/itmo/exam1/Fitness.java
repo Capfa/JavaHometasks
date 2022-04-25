@@ -32,8 +32,8 @@ public class Fitness {
 
         if (LocalDate.now().isAfter(subscription.getFinishDate())) {
             System.out.println("Ваш абонимент просрочен");
-        } else if (moment < subscription.getType().getFromTime() * 60 || moment >= subscription.getType().getToTime() * 60) {
-            System.out.println("Ваш абонимент не действителен в это время дня");
+       // } else if (moment < subscription.getType().getFromTime() * 60 || moment >= subscription.getType().getToTime() * 60) {
+         //   System.out.println("Ваш абонимент не действителен в это время дня");
         } else if ((zoneName.equals("swimmingpool") && subscription.getType() == Type.DAYTIME) || (zoneName.equals("groupclasses") && subscription.getType() == Type.ONETIME)) {
             System.out.println("Эта зона не входит в ваш абонимент");
         }
@@ -42,11 +42,13 @@ public class Fitness {
             //Subscription[]zone=zones[number];
             if (zones[number][i]==null){
                 zones[number][i]=subscription;
-                System.out.println("ФИО "+ subscription.getClient().getFullName() +" в"+ zoneName + "время посещения: "+LocalDateTime.now());
+                System.out.println("ФИО "+ subscription.getClient().getFullName() +" в "+ zoneName + " время посещения: "+LocalDateTime.now());
+                return;
             }
-            System.out.println("В зоне нет мест");
+
 
         }
+        System.out.println("В зоне нет мест");
 
     }
     public void close() {
