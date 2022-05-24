@@ -12,5 +12,5 @@ abstract public class Node {
 
     }
 
-    public abstract void nodeMethode();
+    public void nodeMethode(){};
 }
