@@ -1,30 +1,34 @@
 package ru.itmo.hw14;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 public class Aplication {
     public static void main(String[] args) {
         List<Employee> employees = Employee.employeeGenerator(10);
         System.out.println(employees);
 
-
+        //по имени
         Comparator<Employee> employeeComparator= new NameComparator();
-        TreeSet<Employee> employeeTreeSet  = new TreeSet<>(employeeComparator);
-        employeeTreeSet.add(employees.get(0));
-        employeeTreeSet.add(employees.get(1));
-        employeeTreeSet.add(employees.get(2));
-        System.out.println(employeeTreeSet);
+        employees.sort(employeeComparator);
+        System.out.println(employees);
 
+       //по имени и зп
         Comparator<Employee> employeeSalaryNameComparator= new NameComparator().thenComparing(new SalaryComparator());;
-        TreeSet<Employee> employeeTreeSetSalaryName  = new TreeSet<>(employeeSalaryNameComparator);
-        employeeTreeSetSalaryName .add(employees.get(0));
-        employeeTreeSetSalaryName .add(employees.get(1));
-        employeeTreeSetSalaryName .add(employees.get(2));
-        System.out.println(employeeTreeSetSalaryName );
+        employees.sort(employeeSalaryNameComparator);
+        System.out.println(employees);
 
+        //по имени,зп и возрасту
+        Comparator<Employee> employeeSalaryNameAgeComparator= new NameComparator().thenComparing(new SalaryComparator().thenComparing(new AgeComparator()));
+        employees.sort(employeeSalaryNameAgeComparator);
+        System.out.println(employees);
+
+
+
+        List<Message> messageList=MessageGenerator.generate(10);
+        System.out.println(messageList);
+        MessageTask.countEachPriority(messageList);
+        MessageTask.countEachCode(messageList);
+        MessageTask.removeEach(messageList,MessagePriority.LOW);
 
     }
 }
