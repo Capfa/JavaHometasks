@@ -4,15 +4,14 @@ import java.util.Scanner;
 
 public class PassingNode extends Node{
 
-    private FinalNode node1;
-    private FinalNode node2;
+    private Node node1;
+    private Node node2;
     private Scanner scanner;
     int action;
-    //private FinalNode[] nodes;
 
-    public PassingNode(String text,FinalNode node1,FinalNode node2){
+
+    public PassingNode(String text,Node node1,Node node2){
         super(text);
-    } {
         this.node1=node1;
         this.node2=node2;
         scanner = new Scanner(System.in);
@@ -20,13 +19,13 @@ public class PassingNode extends Node{
 
     public void nodeMethode() {
         while (true) {
-            System.out.println(text + "3. Вернуться в меню");
+            System.out.println(text + "3.Вернуться в меню");
             System.out.println("Ваш ход");
             action = scanner.nextInt();
             if (action==1){
-                this.node1.nodeMethode();
+                node1.nodeMethode();
             } else if (action==2) {
-                this.node2.nodeMethode();
+                node2.nodeMethode();
             } else if (action==3) {
                 System.out.println("меню");break;
 

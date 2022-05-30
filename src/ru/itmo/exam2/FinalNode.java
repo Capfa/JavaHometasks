@@ -6,8 +6,8 @@ public class FinalNode extends Node{
 
     public void nodeMethode() {
         System.out.println(text);
-        Game newGame=new Game();
-        newGame.showMenu();
+        Play newGame=new Play();
+        newGame.start();
 
     }
 }
