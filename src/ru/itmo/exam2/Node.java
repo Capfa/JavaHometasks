@@ -6,9 +6,11 @@ abstract public class Node {
     protected String text;
 
 
+
     public Node(String text) {
 
         this.text=text;
+
 
     }
 

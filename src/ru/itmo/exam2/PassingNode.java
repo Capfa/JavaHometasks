@@ -7,7 +7,8 @@ public class PassingNode extends Node{
     private Node node1;
     private Node node2;
     private Scanner scanner;
-    int action;
+    private GameMenu gameMenu;int action;
+
 
 
     public PassingNode(String text,Node node1,Node node2){
@@ -27,7 +28,8 @@ public class PassingNode extends Node{
             } else if (action==2) {
                 node2.nodeMethode();
             } else if (action==3) {
-                System.out.println("меню");break;
+                GameMenu gameMenu=new GameMenu();
+                gameMenu.showMenu();
 
             } else  {
                 System.out.println("Ошибка.Выберите действие из списка ");
