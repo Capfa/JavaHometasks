@@ -28,7 +28,7 @@ public class PassingNode extends Node{
             } else if (action==2) {
                 node2.nodeMethode();
             } else if (action==3) {
-                GameMenu gameMenu=new GameMenu();
+                GameMenu gameMenu=new GameMenu(text,node1,node2 );
                 gameMenu.showMenu();
 
             } else  {

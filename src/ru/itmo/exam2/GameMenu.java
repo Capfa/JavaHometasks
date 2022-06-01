@@ -5,11 +5,21 @@ import java.util.Scanner;
 public class GameMenu extends Menu {
 
     private Scanner scanner;
-
-    public GameMenu() {
+    private String text;
+    private Node node1;
+    private Node node2;
+    public GameMenu(String text,Node node1,Node node2) {
         scanner = new Scanner(System.in);
+        this.text=text;
+        this.node1=node1;
+        this.node2=node2;
     }
 
+    public void saveGameCommand() {
+        Game game = new Game();
+        Command saveGameCommand = new SaveCommand(game,text,node1,node2);
+        saveGameCommand.execute();
+    }
     public void showMenu() {
         menuText = "Меню:\n" +
                 "        1. Начать игру\n" +
@@ -27,7 +37,7 @@ public class GameMenu extends Menu {
             } else if (chooseItem == 2) {
                 loadGameGameCommand();
             } else if (chooseItem == 3) {
-                saveGameGameCommand();
+                saveGameCommand();
             } else {
                 System.out.println("Комада не известна");
             }

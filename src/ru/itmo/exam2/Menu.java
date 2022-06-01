@@ -28,12 +28,9 @@ public class Menu {
         loadGameCommand.execute();
     }
 
-    public void saveGameGameCommand(){
-        Game game=new Game();
-        Command saveGameCommand=new SaveCommand(game);
-        saveGameCommand.execute();
 
-    }
+
+
     public void showMenu() {
 
             System.out.println(menuText);
