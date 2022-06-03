@@ -1,11 +1,11 @@
 package ru.itmo.exam2;
 
 public class LoadCommand implements Command{
-    private Game game;
-    public LoadCommand(Game game){
-        this.game=game;
+    private SaveLoad loading;
+    public LoadCommand(SaveLoad loading){
+        this.loading=loading;
     }
     public void execute(){
-        game.loadGame();
+        loading.startLoaded();
     }
 }

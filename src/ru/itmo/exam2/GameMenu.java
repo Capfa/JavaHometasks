@@ -16,8 +16,8 @@ public class GameMenu extends Menu {
     }
 
     public void saveGameCommand() {
-        Game game = new Game();
-        Command saveGameCommand = new SaveCommand(game,text,node1,node2);
+        SaveLoad saiving = new SaveLoad();
+        Command saveGameCommand = new SaveCommand(saiving,text,node1,node2);
         saveGameCommand.execute();
     }
     public void showMenu() {

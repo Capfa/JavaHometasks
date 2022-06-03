@@ -23,9 +23,10 @@ public class Menu {
 
 
     public void loadGameGameCommand(){
-        Game game=new Game();
-        Command loadGameCommand=new LoadCommand(game);
+        SaveLoad loading=new SaveLoad();
+        Command loadGameCommand=new LoadCommand(loading);
         loadGameCommand.execute();
+
     }
 
 

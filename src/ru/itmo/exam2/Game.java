@@ -66,11 +66,6 @@ public class Game {
 
 
     }
-    public void saveGame(String text,Node node1,Node node2){
-        PassingNode nodeToSave=new PassingNode(text,node1,node2);
-        System.out.println("Save"+text);
-    }
-    public void loadGame(){
-        System.out.println("Загрузка");
-    }
+
+
 }
