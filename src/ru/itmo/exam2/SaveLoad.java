@@ -4,23 +4,24 @@ import java.io.*;
 
 public class SaveLoad {
 
-    private File file=new File("exam2.bin");
+    private File file=new File("exam2.2.bin");
 
     public SaveLoad (){}
     public SaveLoad (File file){
 
         this.file=file;
     }
-    public void saveGame(String text,Node node1,Node node2){
+    public <T>boolean saveGame(String text,Node node1,Node node2){
+        boolean result = false;
         PassingNode nodeToSave=new PassingNode(text,node1,node2);
         try(FileOutputStream fileOutput = new FileOutputStream(file);
             ObjectOutputStream objectOutput= new ObjectOutputStream(fileOutput)) {
             objectOutput.writeObject(nodeToSave);
-
+            result=true;
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
-
+        return  result;
     }
     public Node loadGame(){
         Object result = null;
