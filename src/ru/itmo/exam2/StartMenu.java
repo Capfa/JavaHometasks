@@ -20,8 +20,10 @@ public class StartMenu extends Menu {
             }
             if (chooseItem == 1) {
                 RunGameCommand();
+                break;
             } else if (chooseItem == 2) {
                 loadGameGameCommand();
+                break;
             } else {
                 System.out.println("Комада не известна");
             }

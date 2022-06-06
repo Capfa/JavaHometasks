@@ -28,16 +28,16 @@ public class GameMenu extends Menu {
                 "        4. Выйти\n";
         while (true) {
             super.showMenu();
-            if (chooseItem == 4) {
-                System.out.println("Вы покинули игру");
-                break;
-            }
-            if (chooseItem == 1) {
+            if  (chooseItem == 1) {
                 RunGameCommand();
             } else if (chooseItem == 2) {
                 loadGameGameCommand();
             } else if (chooseItem == 3) {
                 saveGameCommand();
+
+            } else if (chooseItem == 4) {
+                System.out.println("Вы покинули игру");
+                break;
             } else {
                 System.out.println("Комада не известна");
             }

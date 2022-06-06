@@ -4,7 +4,7 @@ import java.io.*;
 
 public class SaveLoad {
 
-    private File file=new File("exam2.2.bin");
+    private File file=new File("exam2.bin");
 
     public SaveLoad (){}
     public SaveLoad (File file){
