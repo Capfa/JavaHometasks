@@ -22,7 +22,7 @@ public class Menu {
     }
 
 
-    public void loadGameGameCommand(){
+    public void loadGameCommand(){
         SaveLoad loading=new SaveLoad();
         Command loadGameCommand=new LoadCommand(loading);
         loadGameCommand.execute();

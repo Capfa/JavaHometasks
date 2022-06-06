@@ -3,12 +3,12 @@ package ru.itmo.exam2;
 import java.io.Serializable;
 import java.util.Scanner;
 
-public class PassingNode extends Node implements Serializable {
+public class PassingNode extends Node {
 
     private Node node1;
     private Node node2;
     transient private Scanner scanner;
-    private GameMenu gameMenu;int action;
+    int action;
 
 
 
@@ -32,6 +32,7 @@ public class PassingNode extends Node implements Serializable {
                 GameMenu gameMenu=new GameMenu(text,node1,node2 );
                 gameMenu.showMenu();
                 break;
+
             } else  {
                 System.out.println("Ошибка.Выберите действие из списка ");
 

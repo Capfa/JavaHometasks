@@ -22,7 +22,7 @@ public class StartMenu extends Menu {
                 RunGameCommand();
                 break;
             } else if (chooseItem == 2) {
-                loadGameGameCommand();
+                loadGameCommand();
                 break;
             } else {
                 System.out.println("Комада не известна");

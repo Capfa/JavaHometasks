@@ -6,6 +6,6 @@ public class LoadCommand implements Command{
         this.loading=loading;
     }
     public void execute(){
-        loading.startLoaded();
+         loading.startLoaded();
     }
 }

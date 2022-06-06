@@ -30,11 +30,12 @@ public class GameMenu extends Menu {
             super.showMenu();
             if  (chooseItem == 1) {
                 RunGameCommand();
+                break;
             } else if (chooseItem == 2) {
-                loadGameGameCommand();
+                loadGameCommand();
+
             } else if (chooseItem == 3) {
                 saveGameCommand();
-
             } else if (chooseItem == 4) {
                 System.out.println("Вы покинули игру");
                 break;

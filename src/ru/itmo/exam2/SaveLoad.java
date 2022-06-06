@@ -23,11 +23,12 @@ public class SaveLoad {
         }
         return  result;
     }
-    public Node loadGame(){
+    public  Node loadGame(){
         Object result = null;
         try (FileInputStream fileInput = new FileInputStream(file);
              ObjectInputStream objectInput =new ObjectInputStream(fileInput)){
             result = objectInput.readObject();
+
 
         }catch (IOException| ClassNotFoundException e){
             System.out.println(e.getMessage());
