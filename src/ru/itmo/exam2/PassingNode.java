@@ -7,7 +7,7 @@ public class PassingNode extends Node {
 
     private Node node1;
     private Node node2;
-    transient private Scanner scanner;
+
     int action;
 
 
@@ -16,10 +16,11 @@ public class PassingNode extends Node {
         super(text);
         this.node1=node1;
         this.node2=node2;
-        scanner = new Scanner(System.in);
+
     }
 
     public void nodeMethode() {
+        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println(text + "3.Вернуться в меню");
             System.out.println("Ваш ход");
