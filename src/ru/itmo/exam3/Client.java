@@ -25,27 +25,6 @@ public class Client {
         String name = scanner.nextLine();
         Connection connection = new Connection(getSocket());
 
-
-        Thread messageToServer = new Thread(() -> {
-
-            while (!Thread.currentThread().isInterrupted()) {
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                System.out.println("Введите сообщение");
-                String messageText = scanner.nextLine();
-                try {
-                    connection.sendMessage(SimpleMessage.getMessage(name, messageText));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-        messageToServer.start();
-
-
         Thread messageFromServer = new Thread(() -> {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
@@ -58,6 +37,19 @@ public class Client {
             }
         });
         messageFromServer.start();
+
+        Thread messageToServer = new Thread(() -> {
+            while (!Thread.currentThread().isInterrupted()) {
+                System.out.println("Введите сообщение");
+                String messageText = scanner.nextLine();
+                try {
+                    connection.sendMessage(SimpleMessage.getMessage(name, messageText));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+        messageToServer.start();
     }
 
 

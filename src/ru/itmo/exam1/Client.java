@@ -27,6 +27,7 @@ public class Client {
     }
 
 
+
     public String getFullName(){
         return name + " " + surname;
     }

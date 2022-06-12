@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.util.Objects;
 
 public class Connection {
 
@@ -29,5 +30,18 @@ public class Connection {
         return (SimpleMessage) input.readObject();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(socket, input, output);
+    }
+    public void close() throws Exception {
+        input.close();
+        output.close();
+        socket.close();
+    }
 }

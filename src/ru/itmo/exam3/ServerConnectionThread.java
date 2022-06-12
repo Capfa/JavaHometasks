@@ -17,24 +17,17 @@ public class ServerConnectionThread extends Thread{
     private String clientName;
     //private ConcurrentHashMap<String,Connection> connections;
     private CopyOnWriteArraySet<Connection> connections;
-    public ServerConnectionThread (Socket socket, CopyOnWriteArraySet<Connection>connections, ArrayBlockingQueue<SimpleMessage> messages){
-        this.connections=connections;
+    public ServerConnectionThread (Connection connection,ArrayBlockingQueue<SimpleMessage> messages){
         this.messages=messages;
-
-        this.socket=socket;
+        this.connection=connection;
     }
-
     public void run(){
-
         while (!Thread.currentThread().isInterrupted()){
             try {
-                connection = new Connection(socket);
                 SimpleMessage clientMessage = connection.readMessage();
                 System.out.println("получено сообщение: " + clientMessage);
                 messages.put(clientMessage);
                 System.out.println(messages);
-                //connections.putIfAbsent(clientMessage.getSender(),connection);
-                connections.add(connection);
                 System.out.println(connections);
             }catch (InterruptedException e ) {
                 Thread.currentThread().interrupt();
