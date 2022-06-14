@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.Objects;
 
 public class Connection {
@@ -27,8 +28,9 @@ public class Connection {
     }
 
     public SimpleMessage readMessage() throws IOException, ClassNotFoundException {
-        return (SimpleMessage) input.readObject();
+            return (SimpleMessage) input.readObject();
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -39,9 +41,17 @@ public class Connection {
     public int hashCode() {
         return Objects.hash(socket, input, output);
     }
-    public void close() throws Exception {
-        input.close();
-        output.close();
-        socket.close();
+    public void close(){
+        try {
+            System.out.println("close");
+            input.close();
+            output.close();
+            socket.close();
+        }catch (SocketException e){
+            System.out.println("Socket closed");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
     }
 }

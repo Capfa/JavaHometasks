@@ -1,6 +1,7 @@
 package ru.itmo.exam3;
 
 import java.io.IOException;
+import java.io.StreamCorruptedException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -14,8 +15,9 @@ import java.util.concurrent.CopyOnWriteArraySet;
 public class EchoServer {
     private int port;
     private Connection connection;
+    private SimpleMessage clientMessage;
     private ArrayBlockingQueue<SimpleMessage> messages;
-    private ConcurrentHashMap<String, Connection> connections;
+    private ConcurrentHashMap<Connection,String> connections;
     //private CopyOnWriteArraySet<Connection> connections;
 
     public EchoServer(int port) {
@@ -33,16 +35,16 @@ public class EchoServer {
                 while (!Thread.currentThread().isInterrupted()) {
                     try {
                         SimpleMessage serverMessage = messages.take();
-                        for (Map.Entry<String, Connection> set : connections.entrySet()) {
-                            String name = set.getKey();
-                            System.out.println(name);
-                            System.out.println(serverMessage.getSender());
+                        for (Map.Entry<Connection,String> set : connections.entrySet()) {
+                            String name = set.getValue();
                             try {
                                 if (!name.equalsIgnoreCase(serverMessage.getSender())) {
-                                    set.getValue().sendMessage(SimpleMessage.getMessage(serverMessage.getSender(), serverMessage.getText()));
+                                    set.getKey().sendMessage(SimpleMessage.getMessage(serverMessage.getSender(), serverMessage.getText()));
                                 }
                             }catch (SocketException e){
-                                System.out.println("fail");
+                                connections.remove(set.getKey());
+                                set.getKey().close();
+                                System.out.println(connections);
                             }
                         }
                     } catch (InterruptedException e) {
@@ -63,15 +65,18 @@ public class EchoServer {
                     new Thread(() -> {
                         while (!Thread.currentThread().isInterrupted()) {
                             try {
-                                SimpleMessage clientMessage = connection.readMessage();
+                                clientMessage = connection.readMessage();
                                 System.out.println("получено сообщение: " + clientMessage);
                                 messages.put(clientMessage);
-                                connections.putIfAbsent(clientMessage.getSender(), connection);
-                                System.out.println(connections);
+                                connections.putIfAbsent(connection,clientMessage.getSender());
+
                             } catch (ClassNotFoundException e) {
                                 e.printStackTrace();
+                            }catch (SocketException e) {
+                              //  connections.remove(connection);
+                                System.out.println("Connection reset");
                             }catch (IOException e){
-                                e.printStackTrace();
+                                throw new RuntimeException(e);
                             } catch (InterruptedException e) {
                                 Thread.currentThread().interrupt();
                             }

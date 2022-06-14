@@ -3,6 +3,7 @@ package ru.itmo.exam3;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -30,8 +31,10 @@ public class Client {
                 try {
                     SimpleMessage formServer = connection.readMessage();
                     System.out.println("ответ от сервера: " + formServer);
+                }catch (SocketException e){
+                    Thread.currentThread().interrupt();
                 } catch (IOException | ClassNotFoundException e) {
-                    throw new RuntimeException(e);
+                    Thread.currentThread().interrupt();
                 }
 
             }
@@ -42,10 +45,17 @@ public class Client {
             while (!Thread.currentThread().isInterrupted()) {
                 System.out.println("Введите сообщение");
                 String messageText = scanner.nextLine();
-                try {
-                    connection.sendMessage(SimpleMessage.getMessage(name, messageText));
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
+                if (messageText.equalsIgnoreCase("q")) {
+
+                    connection.close();
+                    break;
+                } else {
+
+                    try {
+                        connection.sendMessage(SimpleMessage.getMessage(name, messageText));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
